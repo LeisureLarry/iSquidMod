@@ -1,0 +1,8 @@
+## Interface: 70100
+## Author: Ganders & Imithat (Original author: SAM)
+## Title: iSquidMod |cff01DFD7 Grafic Patch
+## Notes: It just makes WoW prettier.
+## Version: 2.56
+## SavedVariablesPerCharacter: iSquidModDB
+
+iSquidMod.lua
