@@ -1,8 +1,8 @@
-## Interface: 80200
-## Author: Editor: Jay Whaley (Previous Editor: Ganders & Imithat (Original author: SAM))
+## Interface: 90001
+## Author: Editor: Larry @ Baelgun [DE] (Previous Editor: Jay Whaley, Ganders & Imithat (Original author: SAM))
 ## Title: iSquidMod |cff01DFD7 Grafic Patch
 ## Notes: It just makes WoW prettier.
-## Version: 2.6
+## Version: 90001.1
 ## SavedVariablesPerCharacter: iSquidModDB
 
 iSquidMod.lua
