@@ -3,7 +3,7 @@
 	Author: SAM (recoded by Ganders) - (Grafic Patch by Imithat)
 	--Edited by Larry @ Baelgun [DE] [10/28/2020]
 	--Edited by Jay Whaley [09/13/2019]
-	Version: 90002.1
+	Version: 90100.1
 ]]
 
 -- Creates a frame to which the mod to attaches.
