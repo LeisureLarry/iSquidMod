@@ -1,9 +1,9 @@
 --[[
 	SquidMod
 	Author: SAM (recoded by Ganders) - (Grafic Patch by Imithat)
-	--Edited by Larry @ Baelgun [DE] [10/28/2020]
 	--Edited by Jay Whaley [09/13/2019]
-	Version: 90100.1
+	--Edited by Larry @ Baelgun [DE] [01/07/2023]
+	Version: 100002
 ]]
 
 -- Creates a frame to which the mod to attaches.
@@ -117,23 +117,23 @@ end
 -- Will updated the interface based on the provided toggle.
 function iSquidMod:Update(toggle)
 	if ( toggle == 1 ) then
-		MainMenuBarArtFrame.LeftEndCap:Hide()
-		MainMenuBarArtFrame.RightEndCap:Hide()
+		CUI_MainMenuBarLeftEndCap:Hide()
+		CUI_MainMenuBarRightEndCap:Hide()
 	elseif ( toggle == 29 ) then
-		MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\emblemLeft.tga")
-		MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\emblemRight.tga")
-		MainMenuBarArtFrame.LeftEndCap:Show()
-		MainMenuBarArtFrame.RightEndCap:Show()
+		CUI_MainMenuBarLeftEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\emblemLeft.tga")
+		CUI_MainMenuBarRightEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\emblemRight.tga")
+		CUI_MainMenuBarLeftEndCap:Show()
+		CUI_MainMenuBarRightEndCap:Show()
 	else
-		MainMenuBarArtFrame.LeftEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\"..textures[toggle]..".tga")
-		MainMenuBarArtFrame.RightEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\"..textures[toggle]..".tga")
-		MainMenuBarArtFrame.LeftEndCap:Show()
-		MainMenuBarArtFrame.RightEndCap:Show()
+		CUI_MainMenuBarLeftEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\"..textures[toggle]..".tga")
+		CUI_MainMenuBarRightEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\"..textures[toggle]..".tga")
+		CUI_MainMenuBarLeftEndCap:Show()
+		CUI_MainMenuBarRightEndCap:Show()
 	end
-	MainMenuBarArtFrame.LeftEndCap:SetWidth(128)
-	MainMenuBarArtFrame.LeftEndCap:SetHeight(128)
-	MainMenuBarArtFrame.RightEndCap:SetWidth(128)
-	MainMenuBarArtFrame.RightEndCap:SetHeight(128)
+	CUI_MainMenuBarLeftEndCap:SetWidth(128)
+	CUI_MainMenuBarLeftEndCap:SetHeight(128)
+	CUI_MainMenuBarRightEndCap:SetWidth(128)
+	CUI_MainMenuBarRightEndCap:SetHeight(128)
 	iSquidModDB = toggle
 end
 
