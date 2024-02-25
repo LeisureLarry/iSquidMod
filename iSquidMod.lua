@@ -2,16 +2,18 @@
 	SquidMod
 	Author: SAM (recoded by Ganders) - (Grafic Patch by Imithat)
 	--Edited by Jay Whaley [09/13/2019]
-	--Edited by Larry @ Baelgun [DE] [01/07/2023]
-	Version: 100002
+	--Edited by Larry @ Baelgun [DE] [01/07/2023] - [02/25/2024]
+	Version: 100205.1
 ]]
 
--- Creates a frame to which the mod to attaches.
-local iSquidMod = CreateFrame("Frame")
+local iSquidMod = LibStub("AceAddon-3.0"):NewAddon("iSquidMod", "AceHook-3.0")
 
--- List of the loaded textrues available
+local CUI = LibStub("AceAddon-3.0"):GetAddon("ClassicUI")
+
+-- List of the loaded textures available
 local textures = {
 	"hide",
+	"emblem",
 	"griffon",
 	"lion",
 	"diablo1",
@@ -73,8 +75,8 @@ local textures = {
 	"miniyulon",
 }
 
--- Claims this as the database ID for the mod.
-iSquidModDB = 2
+-- Sets the default griffon texture.
+iSquidModDB = 3
 
 -- Defines how to handle the slash commmand for controlling the mod.
 function iSquidMod.SlashCommand(msg)
@@ -88,7 +90,7 @@ function iSquidMod.SlashCommand(msg)
 			for i,v in ipairs(textures) do
 				if ( command == string.lower(v) ) then
 					self:Update(i)
-					DEFAULT_CHAT_FRAME:AddMessage("iSquidMod: "..string.lower(v))
+					iSquidMod.ChatMsg("iSquidMod: "..string.lower(v))
 					help = false
 				end
 			end
@@ -96,22 +98,37 @@ function iSquidMod.SlashCommand(msg)
 		elseif ( type(command) == "number" ) then
 			if textures[command] ~= nil then
 				self:Update(command)
-				DEFAULT_CHAT_FRAME:AddMessage("iSquidMod: "..string.lower(textures[command]))
+				iSquidMod.ChatMsg("iSquidMod: "..string.lower(textures[command]))
 				help = false
 			end
 		end
 
-		-- Will display the usage string if requested.
 		if ( help == true ) then
-			for i,v in ipairs(textures) do
-				DEFAULT_CHAT_FRAME:AddMessage("iSquidMod: /squid "..v)
-			end
+			iSquidMod.ShowHelp()
 		end
 	else
-		for i,v in ipairs(textures) do
-			DEFAULT_CHAT_FRAME:AddMessage("iSquidMod: /squid "..v)
-		end
+		iSquidMod.ShowHelp()
 	end
+end
+
+function iSquidMod.ChatMsg(message)
+	DEFAULT_CHAT_FRAME:AddMessage(message);
+end
+
+function iSquidMod.ShowHelp()
+	for i,v in ipairs(textures) do
+		iSquidMod.ChatMsg("iSquidMod: /squid "..v)
+	end
+end
+
+-- Defines how to integrate into Classic UI
+function iSquidMod:OnEnable()
+  self:RawHook(CUI, "ModifyOriginalFrames", true)
+end
+
+function iSquidMod:ModifyOriginalFrames()
+	self.hooks[CUI].ModifyOriginalFrames()
+	iSquidMod:Update(iSquidModDB)
 end
 		
 -- Will updated the interface based on the provided toggle.
@@ -119,12 +136,12 @@ function iSquidMod:Update(toggle)
 	if ( toggle == 1 ) then
 		CUI_MainMenuBarLeftEndCap:Hide()
 		CUI_MainMenuBarRightEndCap:Hide()
-	elseif ( toggle == 29 ) then
+	elseif ( toggle == 2 ) then
 		CUI_MainMenuBarLeftEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\emblemLeft.tga")
 		CUI_MainMenuBarRightEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\emblemRight.tga")
 		CUI_MainMenuBarLeftEndCap:Show()
 		CUI_MainMenuBarRightEndCap:Show()
-	else
+	elseif ( textures[toggle] ~= nil ) then
 		CUI_MainMenuBarLeftEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\"..textures[toggle]..".tga")
 		CUI_MainMenuBarRightEndCap:SetTexture("Interface\\AddOns\\iSquidMod\\skin\\"..textures[toggle]..".tga")
 		CUI_MainMenuBarLeftEndCap:Show()
@@ -137,12 +154,8 @@ function iSquidMod:Update(toggle)
 	iSquidModDB = toggle
 end
 
--- Attches the Update function to the OnEvent event to actually tie this mod with the main WoW UI.
-iSquidMod:SetScript("OnEvent", function() iSquidMod:Update(iSquidModDB) end)
--- Sets the target event to listen for to trigger the Update function.
-iSquidMod:RegisterEvent("PLAYER_LOGIN")
-
 -- String literal for the actual in-game slash command.
 SLASH_SQUID1 = "/squid"
+
 -- Adds the string literal to this mods registered slash commands.
 SlashCmdList["SQUID"] = iSquidMod.SlashCommand
