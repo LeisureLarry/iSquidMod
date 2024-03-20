@@ -2,8 +2,8 @@
 	SquidMod
 	Author: SAM (recoded by Ganders) - (Grafic Patch by Imithat)
 	--Edited by Jay Whaley [09/13/2019]
-	--Edited by Larry @ Baelgun [DE] [01/07/2023] - [02/25/2024]
-	Version: 100205.1
+	--Edited by Larry @ Baelgun [DE] [01/07/2023] - [03/20/2024]
+	Version: 100206.1
 ]]
 
 local iSquidMod = LibStub("AceAddon-3.0"):NewAddon("iSquidMod", "AceHook-3.0")
